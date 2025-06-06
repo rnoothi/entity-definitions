@@ -40,6 +40,20 @@ synthesis:
       tags.:
         ttl: PT4H
 
+  # Data from Nordstrom Versa Custom Events
+  - identifier: vaApplHealth.applianceName
+    name: vaApplHealth.applianceName
+    encodeIdentifierInGUID: true
+    conditions:
+      - attribute: vaApplHealth.tenant
+        value: Nordstrom
+      - attribute: event_type
+        value: VersaApplHealthSample
+    # Add a 4 hour ttl on all tags ingested in metric api using tags. prefix
+    prefixedTags:
+      tags.:
+        ttl: PT4H
+
 goldenTags:
 - device_ip
 - container_service

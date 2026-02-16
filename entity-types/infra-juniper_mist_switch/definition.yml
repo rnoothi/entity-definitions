@@ -1,0 +1,45 @@
+# Network monitoring entity
+domain: INFRA
+type: JUNIPER_MIST_SWITCH
+synthesis:
+  rules:
+  - ruleName: infra_juniper_mist_switch_mac
+    name: mac
+    identifier: mac
+    encodeIdentifierInGUID: true
+    conditions:
+    - attribute: instrumentation.name
+      value: juniper_mist
+    - attribute: instrumentation.provider
+      value: newrelic
+    - attribute: type
+      value: switch
+    tags:
+      ip:
+        entityTagName: ip
+        multiValue: false
+      mac:
+        entityTagName: mac
+        multiValue: false
+      model:
+        entityTagName: model
+        multiValue: false
+      type:
+        entityTagName: type
+        multiValue: false
+      device_id:
+        entityTagName: device_id
+        multiValue: false
+
+    # Add a 4 hour ttl on all tags ingested in metric api using tags. prefix
+    prefixedTags:
+      tags.:
+        ttl: PT4H
+
+goldenTags:
+- device_ip
+
+
+ownership:
+  primaryOwner:
+    teamName: "Network Monitoring"
